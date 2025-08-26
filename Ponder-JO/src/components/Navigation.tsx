@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Zap, Users, MapPin, BookOpen, FileText, Clock, Image } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const navItems = [
   { name: "Requiem", path: "/", icon: Zap },
@@ -29,21 +30,30 @@ export const Navigation = () => {
     const active = isActive(item.path);
     
     return (
-      <Link
-        to={item.path}
-        onClick={onClick}
-        className={`group flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105 ${
-          active 
-            ? "bg-primary/20 text-primary border border-primary/30 glow-text" 
-            : "hover:bg-card/50 text-muted-foreground hover:text-foreground"
-        }`}
-      >
-        <Icon className={`w-5 h-5 transition-all duration-300 ${active ? "animate-pulse-glow" : "group-hover:text-primary"}`} />
-        <span className="font-medium">{item.name}</span>
-        {active && (
-          <div className="ml-auto w-2 h-2 bg-primary rounded-full animate-pulse-glow" />
-        )}
-      </Link>
+      <TooltipProvider delayDuration={0}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Link
+              to={item.path}
+              onClick={onClick}
+              className={`group flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105 ${
+                active 
+                  ? "bg-primary/20 text-primary border border-primary/30 glow-text" 
+                  : "hover:bg-card/50 text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <Icon className={`w-5 h-5 transition-all duration-300 ${active ? "animate-pulse-glow" : "group-hover:text-primary"}`} />
+              <span className="font-medium">{item.name}</span>
+              {active && (
+                <div className="ml-auto w-2 h-2 bg-primary rounded-full animate-pulse-glow" />
+              )}
+            </Link>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{item.name}</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
     );
   };
 
@@ -83,6 +93,42 @@ export const Navigation = () => {
                   onClick={() => setIsOpen(false)}
                 />
               ))}
+              <div className="flex justify-center gap-6 mt-8">
+                <TooltipProvider delayDuration={0}>
+                  <div className="flex justify-center gap-6 mt-8">
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                        </a>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Instagram</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                        </a>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Wattpad</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5L20.24 12.24zm-2.62 2.62L10 21H3v-7l9.62-9.62a4 4 0 0 1 5.66 5.66z"/><path d="M19 21v-7"/><path d="M14.5 17.5l-3-3"/><path d="M11.5 14.5l3 3"/></svg>
+                        </a>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Inkitt</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+                </TooltipProvider>
+              </div>
             </div>
           </SheetContent>
         </Sheet>

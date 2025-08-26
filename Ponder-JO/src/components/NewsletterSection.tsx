@@ -1,24 +1,43 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Mail, Shield, Users, Zap } from "lucide-react";
+import { Mail, Shield, Users, Zap, User, MessageSquare } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export const NewsletterSection = () => {
-  const [email, setEmail] = useState("");
+  const [formData, setFormData] = useState({
+  name: "",
+  email: "",
+  message: "",
+  interest: ""
+});
   const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+    
+    if (!formData.email || !formData.name) {
+      toast({
+        title: "Missing required fields",
+        description: "Please fill in all required fields",
+        variant: "destructive"
+      });
+      return;
+    }
     
     toast({
-      title: "Welcome to the Midoki",
-      description: "Your memory will be preserved. Updates incoming...",
+      title: "Thank you for your message",
+      description: `I'll get back to you soon, ${formData.name}`,
     });
     
-    setEmail("");
+    setFormData({
+      name: "",
+      email: "",
+      message: "",
+      interest: ""
+    });
   };
 
   return (
@@ -38,33 +57,76 @@ export const NewsletterSection = () => {
             </div>
             
             <CardTitle className="text-3xl md:text-4xl font-bold glow-text mb-4">
-              Become Midoki
+              Contact Us
             </CardTitle>
             
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Keep your memory intact while reality fragments around you. 
-              Join the community and get updates on new chapters, lore drops, and the expanding Aegis universe.
+              Have questions or feedback? We'd love to hear from you. 
+              Fill out the form below and we'll get back to you as soon as possible.
             </p>
           </CardHeader>
           
           <CardContent className="relative z-10 px-8 pb-8">
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto mb-8">
-              <Input
-                type="email"
-                placeholder="Enter your email..."
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 bg-background/50 border-border/50 focus:border-primary/50 focus:ring-primary/20"
-                required
-              />
-              <Button 
-                type="submit"
-                className="pulse-glow bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6"
-              >
-                <Mail className="w-4 h-4 mr-2" />
-                Join
-              </Button>
-            </form>
+            <form onSubmit={handleSubmit} className="grid gap-4 max-w-md mx-auto mb-8">
+  <div className="grid gap-2">
+    <label htmlFor="name" className="text-sm font-medium text-muted-foreground">
+      Name <span className="text-destructive">*</span>
+    </label>
+    <div className="relative">
+      <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+      <Input
+        id="name"
+        placeholder="Your name"
+        value={formData.name}
+        onChange={(e) => setFormData({...formData, name: e.target.value})}
+        className="pl-10 bg-background/50 border-border/50 focus:border-primary/50 focus:ring-primary/20"
+        required
+      />
+    </div>
+  </div>
+  
+  <div className="grid gap-2">
+    <label htmlFor="email" className="text-sm font-medium text-muted-foreground">
+      Email <span className="text-destructive">*</span>
+    </label>
+    <div className="relative">
+      <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+      <Input
+        id="email"
+        type="email"
+        placeholder="your.email@example.com"
+        value={formData.email}
+        onChange={(e) => setFormData({...formData, email: e.target.value})}
+        className="pl-10 bg-background/50 border-border/50 focus:border-primary/50 focus:ring-primary/20"
+        required
+      />
+    </div>
+  </div>
+  
+  <div className="grid gap-2">
+    <label htmlFor="message" className="text-sm font-medium text-muted-foreground">
+      Your Message
+    </label>
+    <div className="relative">
+      <MessageSquare className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+      <Textarea
+        id="message"
+        placeholder="What would you like to ask us?"
+        value={formData.message}
+        onChange={(e) => setFormData({...formData, message: e.target.value})}
+        className="pl-10 bg-background/50 border-border/50 focus:border-primary/50 focus:ring-primary/20 min-h-[100px]"
+      />
+    </div>
+  </div>
+  
+  <Button 
+    type="submit"
+    className="pulse-glow bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 mt-2"
+  >
+    <Mail className="w-4 h-4 mr-2" />
+    Send Message
+  </Button>
+</form>
             
             {/* Features */}
             <div className="grid md:grid-cols-3 gap-6 text-center">

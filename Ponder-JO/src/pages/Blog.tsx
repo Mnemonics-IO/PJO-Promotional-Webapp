@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Calendar, Clock, User, Search, BookOpen, Zap, Users, Eye } from "lucide-react";
 
+import UserEngagementSection from "@/components/UserEngagementSection";
+
 const blogPosts = [
   {
     id: "aegis-origins",
@@ -326,6 +328,7 @@ export default function Blog() {
           </div>
         </div>
       </div>
+      <UserEngagementSection />
     </div>
   );
 }

@@ -21,7 +21,7 @@ const chapters = [
   {
     id: 2, 
     title: "Ponder Why ?",
-    status: "published",
+    status: "upcoming",
     wordCount: 4200,
     readTime: 17,
     perspective: "Joan", 
@@ -32,7 +32,7 @@ const chapters = [
   },
   {
     id: 3,
-    title: "The Divide Spreads",
+    title: "Oblivion",
     status: "published", 
     wordCount: 3800,
     readTime: 15,
