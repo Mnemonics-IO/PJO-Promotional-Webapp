@@ -1,0 +1,186 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Genesis / Aegis Chronicles Design System - Cinematic Sci-Fi */
+
+@layer base {
+  :root {
+    /* Black and White Theme */
+    --background: 0 0% 100%; /* White */
+    --foreground: 0 0% 0%;   /* Black */
+
+    /* Card Elements */
+    --card: 0 0% 95%; /* Light grey for cards */
+    --card-foreground: 0 0% 0%;
+
+    /* Interactive Elements */
+    --popover: 0 0% 95%;
+    --popover-foreground: 0 0% 0%;
+
+    /* Primary - Black */
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary - Dark Grey */
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Subtle Elements */
+    --muted: 0 0% 90%;
+    --muted-foreground: 0 0% 20%;
+
+    /* Accent - Black */
+    --accent: 0 0% 0%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Destructive - Red (kept for functionality) */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Interactive Borders */
+    --border: 0 0% 0%; /* Black */
+    --input: 0 0% 10%; /* Dark input fields */
+    --ring: 0 0% 0%; /* Black */
+
+    /* Custom Design Tokens (Grayscale) */
+    --aegis-glow: 0 0% 0%; /* Black */
+    --divide-crack: 0 0% 0%; /* Black */
+    --starfield: 0 0% 5%; /* Very dark background for subtle effects */
+    --energy-pulse: 0 0% 0%; /* Black */
+    
+    /* Gradients (Grayscale) */
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(0 0% 90%) 50%, hsl(0 0% 80%) 100%);
+    --gradient-glow: radial-gradient(circle at 50% 50%, hsl(0 0% 0% / 0.3) 0%, transparent 70%);
+    --gradient-violet: linear-gradient(135deg, hsl(0 0% 0%) 0%, hsl(0 0% 0%) 100%);
+    
+    /* Animation Variables */
+    --pulse-speed: 2s;
+    --glitch-duration: 0.3s;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark mode for black and white theme (inverted) */
+    --background: 0 0% 0%; /* Black */
+    --foreground: 0 0% 100%; /* White */
+
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 0 0% 85%;
+    --secondary-foreground: 0 0% 0%;
+
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 80%;
+
+    --accent: 0 0% 100%; /* White */
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 100%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 100%; /* White */
+    --sidebar-background: 0 0% 5%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground overflow-x-hidden;
+  }
+}
+
+/* Custom Animations (Adjusted for black and white) */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: none; }
+  50% { box-shadow: none; }
+}
+
+@keyframes crack-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes particle-fall {
+  0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); } /* Subtle glitch */
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+/* Utility Classes */
+.glow-text {
+  text-shadow: none;
+}
+
+.pulse-glow {
+  animation: pulse-glow var(--pulse-speed) ease-in-out infinite;
+}
+
+.crack-flicker {
+  animation: crack-flicker 3s ease-in-out infinite;
+}
+
+.particle {
+  animation: particle-fall 8s linear infinite; /* Keep for subtle background effects */
+}
+
+.typewriter {
+  animation: typewriter 3s steps(40) 1s both;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid hsl(var(--accent)); /* Use general accent for typewriter */
+}
+
+.glitch-effect:hover {
+  animation: glitch var(--glitch-duration) ease-in-out;
+}
